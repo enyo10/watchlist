@@ -2,7 +2,7 @@ package ch.enyo.springapp.whatchlist;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
+@GoodMovie
 public class WatchlistItem {
 
 	private Integer id;
