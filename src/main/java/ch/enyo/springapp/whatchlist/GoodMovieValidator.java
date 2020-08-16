@@ -7,8 +7,14 @@ public class GoodMovieValidator implements ConstraintValidator<GoodMovie, Watchl
 
 	@Override
 	public boolean isValid(WatchlistItem value, ConstraintValidatorContext context) {
-		
-	return !(Double.valueOf(value.getRating()) >= 8 &&  "L".equals(value.getPriority()));
+		Double number;
+		try {
+			number = Double.parseDouble(value.getRating());
+		} catch (NumberFormatException e) {
+			return true;
+		}
+
+		return !(number >= 8 &&  "L".equals(value.getPriority()));
 	}
 
 }

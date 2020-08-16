@@ -20,37 +20,44 @@ public class WatchlistController {
 
 	List<WatchlistItem> watchlistItems = new ArrayList<WatchlistItem>();
 	private static int index = 1;
-	
+
 	@PostMapping("/watchlistItemForm")
 	public ModelAndView submitWatchlistItemForm(@Valid WatchlistItem watchlistItem, BindingResult bindingResult) {
-	
+
 		if (bindingResult.hasErrors()) {
-            return new ModelAndView("watchlistItemForm");
-        }
+			return new ModelAndView("watchlistItemForm");
+		}
 		
+		
+
 		WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
-		
+
 		if (existingItem == null) {
+			
+			if (itemAlreadyExists(watchlistItem.getTitle())) {
+				bindingResult.rejectValue("title", "", "This movie is already on your watchlist");
+	            return new ModelAndView("watchlistItemForm");
+			}
 			watchlistItem.setId(index++);
 			watchlistItems.add(watchlistItem);
-			
+
 		} else {
 			existingItem.setComment(watchlistItem.getComment());
 			existingItem.setPriority(watchlistItem.getPriority());
 			existingItem.setRating(watchlistItem.getRating());
 			existingItem.setTitle(watchlistItem.getTitle());  
 		}
-		
+
 		RedirectView redirect = new RedirectView();
 		redirect.setUrl("/watchlist");
-		
+
 		return new ModelAndView(redirect);
 	}
 
 	@GetMapping("/watchlistItemForm")
 	public ModelAndView showWatchlistItemForm(@RequestParam(required=false) Integer id) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		
+
 		WatchlistItem watchlistItem = findWatchlistItemById(id);
 		if (watchlistItem == null) {
 			model.put("watchlistItem", new WatchlistItem());
@@ -58,6 +65,24 @@ public class WatchlistController {
 			model.put("watchlistItem", watchlistItem);
 		}
 		return new ModelAndView("watchlistItemForm" , model);
+	}
+
+	
+
+	/**
+	 * @return
+	 */
+	@GetMapping("/watchlist")
+	public ModelAndView getList() {
+
+		String viewName = "watchlist";
+		Map<String, Object> model = new HashMap<String, Object>();
+
+
+		model.put("watchlistItems", watchlistItems);
+		model.put("numberOfMovies", watchlistItems.size());
+
+		return new ModelAndView(viewName, model);
 	}
 	
 	private WatchlistItem findWatchlistItemById(Integer id) {
@@ -69,19 +94,13 @@ public class WatchlistController {
 		return null;
 	}
 
-	/**
-	 * @return
-	 */
-	@GetMapping("/watchlist")
-	public ModelAndView getList() {
+	private boolean itemAlreadyExists(String title) {
 
-		String viewName = "watchlist";
-		Map<String, Object> model = new HashMap<String, Object>();
-
-	
-		model.put("watchlistItems", watchlistItems);
-		model.put("numberOfMovies", watchlistItems.size());
-
-		return new ModelAndView(viewName, model);
+		for (WatchlistItem watchlistItem : watchlistItems) {
+			if (watchlistItem.getTitle().equals(title)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
