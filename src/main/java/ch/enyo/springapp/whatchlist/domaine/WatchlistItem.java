@@ -1,7 +1,11 @@
-package ch.enyo.springapp.whatchlist;
+package ch.enyo.springapp.whatchlist.domaine;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import ch.enyo.springapp.whatchlist.validation.GoodMovie;
+import ch.enyo.springapp.whatchlist.validation.Priority;
+import ch.enyo.springapp.whatchlist.validation.Rating;
 @GoodMovie
 public class WatchlistItem {
 

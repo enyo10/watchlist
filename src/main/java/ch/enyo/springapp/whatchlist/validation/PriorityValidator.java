@@ -1,4 +1,4 @@
-package ch.enyo.springapp.whatchlist;
+package ch.enyo.springapp.whatchlist.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

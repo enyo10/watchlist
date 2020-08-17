@@ -1,6 +1,7 @@
- <html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
+<!-- Meta tags -->
+<meta charset="utf-8">
 <meta name="viewport" content="width = device-width, initial-scale = 1, shrink-to-fit = no">
 
 <!-- Bootstrap CSS -->
@@ -24,10 +25,10 @@
             <div class = "collapse navbar-collapse" id = "navbarSupportedContent">
                <ul class = "navbar-nav mr-auto">
                   <li class = "nav-item">
-                     <a class = "nav-link " href = "/">Home</a>
+                     <a class = "nav-link active" href = "/">Home</a>
                   </li>
                   <li class = "nav-item">
-                     <a class = "nav-link active" href = "/watchlist">Watchlist</a>
+                     <a class = "nav-link" href = "/watchlist">Watchlist</a>
                   </li>
                   <li class = "nav-item ">
                      <a class = "nav-link" href = "/watchlistItemForm">Submit an item</a>
@@ -36,32 +37,8 @@
                
             </div>
       	</nav> 
-		<h2  class = "mt-4">Watchlist</h2>
-		<table class="table">
-			<thead class = "thead-light">
-		        <tr>
-		            <th class="text-left">Title</th>
-		            <th class="text-left">Rating</th>
-		            <th class="text-left">Priority</th>
-		            <th class="text-left">Comment</th>
-		            <th class="text-left"></th>
-		        </tr>
-		    </thead>
-			<tbody>
-				<tr th:each="watchlistItem : ${watchlistItems}">
-            <td th:text="${watchlistItem.title}">Avatar</td>
-            <td th:text="${watchlistItem.rating}">7.8</td>
-            <td th:text="${watchlistItem.priority}">LOW</td>
-            <td th:text="${watchlistItem.comment}">Peter recommended</td>
-			<td><a href="#" class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${watchlistItem.id})}">Update</a></td>
-
-		</tr>
-			</tbody>
-		</table>
-		<hr/>
-		<div >
-			<div>Number of movies to watch: <span th:text="${numberOfMovies}"> </div>	 
-		</div>
+		<h2  class = "mt-4">Welcome to the Watchlist application!</h2> <br>
+		<h5 >Made for movie lovers who have a hard time choosing their next movie to watch.</h5>
 		
 	</div>
 

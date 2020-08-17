@@ -1,7 +1,9 @@
-package ch.enyo.springapp.whatchlist;
+package ch.enyo.springapp.whatchlist.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import ch.enyo.springapp.whatchlist.domaine.WatchlistItem;
 
 public class GoodMovieValidator implements ConstraintValidator<GoodMovie, WatchlistItem> {
 

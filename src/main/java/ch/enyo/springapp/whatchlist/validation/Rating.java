@@ -1,6 +1,6 @@
-package ch.enyo.springapp.whatchlist;
+package ch.enyo.springapp.whatchlist.validation;
 
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
@@ -10,11 +10,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Retention(RUNTIME)
-@Target(TYPE)
-@Constraint(validatedBy = GoodMovieValidator.class)
-public @interface GoodMovie {
-	
-String message() default "If a movie is as good as 8 then priority should be at least M";
+@Target(FIELD)
+@Constraint(validatedBy = RatingValidator.class)
+public @interface Rating {
+
+	String message() default "Must be between 5.0 and 10.0";
 	
 	Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
